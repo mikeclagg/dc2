@@ -7,7 +7,7 @@ import { EventEmitter } from 'events'
 export default class SimplePubSub {
   private _eventBus: EventEmitter = new EventEmitter()
 
-  public publish(eventName: string, data: any = {}) {
+  public publish(eventName: string, data = {}): void {
     this._eventBus.emit(eventName, data)
   }
 

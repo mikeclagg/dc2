@@ -28,8 +28,16 @@ export interface DocCard {
   rules: DocRules
 }
 
+export interface DocEvents {
+  [event: string]: string
+}
+
 export interface DocHands {
   [player: string]: DocCard[]
+}
+
+export interface DocStore {
+  [key: string]: boolean
 }
 
 export const CARDS_SETUP: string[] = [
@@ -59,8 +67,8 @@ export const SUITS: DocSuits = {
 
 export class DeckOfCards extends SimplePubSub {
   private _values: string[] = [...CARDS_SETUP]
-  private _deck: any = {}
-  private _dealt: any = {}
+  private _deck: DocStore = {}
+  private _dealt: DocStore = {}
   private _rules: DocRules = {
     cardsPerPlayer: 13,
     state: 'face-down',
@@ -68,7 +76,7 @@ export class DeckOfCards extends SimplePubSub {
   }
   private _hands: DocHands = {}
 
-  public EVENTS: any = {
+  public EVENTS: DocEvents = {
     CARD_DEALT: 'CARD_DEALT',
     DEAL_END: 'DEAL_END',
     DECK_END: 'DECK_END'
@@ -79,12 +87,15 @@ export class DeckOfCards extends SimplePubSub {
    * creates a deck of cards and stores the rules
    * @param rules: DocRules
    */
-  public deck(rules: DocRules, maxCards: number = MAX_CARDS): DocCard[] {
+  public deck(rules: DocRules, newDeck = false, maxCards: number = MAX_CARDS): DocCard[] {
     /**
      * Create a hand, while checking what's been dealt for a unique hand
      */
-    const currentDealt: any = []
+    const currentDealt: string[] = []
     this.rules = rules
+    if (newDeck) {
+      this._dealt = {};
+    }
     while (currentDealt.length < maxCards) {
       const card = this._makeCard()
       const dealt = `${card.suit}::${card.value}`
