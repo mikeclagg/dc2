@@ -1,7 +1,7 @@
 {
-  "name": "typescript-package-boilerplate",
-  "version": "0.1.0",
-  "description": "TypeScript NPM Module Boilerplate",
+  "name": "deck-of-cards",
+  "version": "0.1.1",
+  "description": "TypeScript NPM Module To Manage Card Deck",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uWynell/typescript-package-boilerplate.git"
+    "url": "git+https://github.com/belikemike/dc2.git"
   },
   "keywords": [
     "boilerplate",
