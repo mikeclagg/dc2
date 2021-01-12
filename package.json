@@ -1,6 +1,6 @@
 {
   "name": "deck-of-cards",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "TypeScript NPM Module To Manage Card Deck",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

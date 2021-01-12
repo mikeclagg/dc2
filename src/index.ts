@@ -48,7 +48,7 @@ export const CARDS_SETUP: string[] = [
   'A'
 ]
 
-export const MAX_CARDS: number = 52
+export const MAX_CARDS = 52
 
 export const SUITS: DocSuits = {
   spades: '♠',
@@ -111,15 +111,15 @@ export class DeckOfCards extends SimplePubSub {
     deckSlice.forEach((cardStr: string, index: number) => {
       for (let p = 1; p <= this.rules.players; p++) {
         const card: DocCard = this._cardFrom(deckSlice[index])
-        const player: string = `player${p}`
+        const player = `player${p}`
         this._hands[player] = Array.isArray(this.hands[player])
           ? this.hands[player]
           : []
         this._hands[player].push(card)
-        this.publish(this.EVENTS.DEAL_END, { player: `player${p}`, index })
+        this.publish(this.EVENTS.CARD_DEALT, { player: `player${p}`, index })
       }
     })
-    this.publish(this.EVENTS.DEA, { hands: this._hands })
+    this.publish(this.EVENTS.DEAL_END, { hands: this._hands })
     return this._hands
   }
 
