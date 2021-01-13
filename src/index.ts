@@ -121,15 +121,18 @@ export class DeckOfCards extends SimplePubSub {
 
     deckSlice.forEach((cardStr: string, index: number) => {
       for (let p = 1; p <= this.rules.players; p++) {
+
         if (deckSlice.length) {
+          console.log(deckSlice.length);
           const card: DocCard = this._cardFrom(cardStr)
           const player = `player${p}`
           this._hands[player] = Array.isArray(this.hands[player])
             ? this.hands[player]
             : []
           this._hands[player].push(card)
+          this._dealt[cardStr] = true;
           deckSlice.pop();
-          this.publish(this.EVENTS.CARD_DEALT, { player: `player${p}`, index })
+          this.publish(this.EVENTS.CARD_DEALT, { player: `player${p}`, index });
         }
       }
     })
